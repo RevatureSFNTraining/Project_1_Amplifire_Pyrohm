@@ -1,4 +1,4 @@
-# Project_1_Amplifire_Pyrohm
+# Project 1 - Team: Amplifire Pyrohm
 
 New Repository for Project 1. 
 
