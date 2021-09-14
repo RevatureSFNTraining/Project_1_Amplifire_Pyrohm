@@ -40,12 +40,11 @@ Clone this repo into a folder that you have isolated and preped for the project.
 
 ## Merging after Pushing
 
-- To merge with main/origin branch make sure you pull changes ```git pull``` 
+- Your going to want to switch branches ```git checkout main``` this will take you to the main branch where the repo has been cloned 
+- After switching to main ****** Very Important ****** ```git pull``` Always pull before attempting to add commit and push.` 
 
-- Your going to want to switch branches ```git branch main or git branch main/origin``` this will take you to the main branch where the repo has been cloned 
+- Then merge your changes ```git merge yourbranchname```.
 
-- Make sure you pull any changes ```git pull main or git pull origin/main``` 
-
-- Then merge your changes ```git merge yourbranchname```. 
+- If you get an error reach out to me and I will help you trouble shoot it!
 
 
