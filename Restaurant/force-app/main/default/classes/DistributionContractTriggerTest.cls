@@ -18,10 +18,10 @@ private class DistributionContractTriggerTest {
             Distribution_Contract__c aDContract = new Distribution_Contract__c(Name = 'false contracts', Is_Active__c = false, Account__c = a.Id, Distributor__c = d.Id, Cost__c = 5, Product_Count__c = 5);
             dContracts.add(aDContract);
         }
-
+        
         insert dContracts;
     }
-
+    
     @isTest static void singleTest() {
         Test.startTest();
         Account a = [SELECT Id FROM Account WHERE Name = 'hi' LIMIT 1];
@@ -48,9 +48,9 @@ private class DistributionContractTriggerTest {
         System.assertEquals(1, numSuccess);
         Test.stopTest();
     }
-
+    
     @isTest static void bulkTest() {
-		Test.startTest();
+        Test.startTest();
         Account a = [SELECT Id FROM Account WHERE Name = 'hi' LIMIT 1];
         Distributor__c d = [SELECT Id FROM Distributor__c WHERE Name = 'hi' LIMIT 1];
         
@@ -71,7 +71,7 @@ private class DistributionContractTriggerTest {
         
         List<Database.deleteResult> drsSuccess = Database.delete(distrContractsSuccess, false);
         List<Database.deleteResult> drsFail = Database.delete(distrContractsFail, false);
-
+        
         Integer numSuccess = 0;
         for(Database.DeleteResult dr: drsSuccess) {
             if(dr.isSuccess()) {
