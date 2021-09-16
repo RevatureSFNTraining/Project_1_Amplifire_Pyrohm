@@ -1,2 +1,8 @@
-<apex:page >
+<apex:page standardController="Food__c" recordSetVar="foods">
+    <apex:pageBlock title="Food Stock">
+        <apex:pageBlockTable value="{! foods }" var="f">
+            <apex:column value="{! f.name }"/>
+            <apex:column value="{! f.stock_amount__c }"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
 </apex:page>
