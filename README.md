@@ -47,4 +47,62 @@ Clone this repo into a folder that you have isolated and preped for the project.
 
 - If you get an error reach out to me and I will help you trouble shoot it!
 
+# Cloning an Org Guide
+
+Welcome to Debugging 301 
+
+## Lets get down to buisness
+
+To replicate your org in another playground follow these steps:
+
+- Make sure the ORG has at least 75% Code Coverage then proceed below 
+- Search For Package Manager
+<img width="230" alt="Screen Shot 2021-09-17 at 2 27 23 PM" src="https://user-images.githubusercontent.com/61764500/133836595-ae6cba93-3e0c-4257-967f-9ceff12423c3.png">
+- Select New
+
+![image](https://user-images.githubusercontent.com/61764500/133837071-165dcb46-60a7-4305-97b8-5d6350b4c17b.png)
+
+- Fill out Info 
+
+![image](https://user-images.githubusercontent.com/61764500/133837141-6a0a966a-043c-4e3e-a672-c654f6f9911a.png)
+
+- Copy Your Components
+
+![image](https://user-images.githubusercontent.com/61764500/133837270-b70063d1-102d-46a5-a401-02702e60cac0.png)
+
+- Then Upload
+
+You will then shortly recieve an email that your unmanaged package is ready
+
+## Create a new Playground
+
+- This step is straight forward
+
+## Go to Email 
+
+- Open Link in email and install the package onto the new playground.
+
+## Visual Studio Code 
+
+### If you have old triggers, classes and pages be sure to follow these steps as well
+
+- Open into your project directory
+
+- Authorize the org with `SFDX: Authorize an Org`
+
+- Click manifest
+
+- Right Click pacakage and push changes to new playground
+
+# Congrats 
+
+If you made it this far.
+
+Hopefully this is only your first time having to perform this clone! 
+
+
+
+
+ 
+
 
