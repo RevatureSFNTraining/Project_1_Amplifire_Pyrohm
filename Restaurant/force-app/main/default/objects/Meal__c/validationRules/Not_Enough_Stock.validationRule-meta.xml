@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_Enough_Stock</fullName>
+    <active>true</active>
+    <errorConditionFormula>Food_Recipe_Amount__c &gt; Food__r.Stock_Amount__c</errorConditionFormula>
+    <errorMessage>Can&apos;t add a meal if there isn&apos;t enough in stock</errorMessage>
+</ValidationRule>

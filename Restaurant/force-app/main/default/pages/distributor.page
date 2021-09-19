@@ -1,0 +1,4 @@
+<apex:page standardController="Distributor__c" recordSetVar="Distributor">
+    
+    
+</apex:page>

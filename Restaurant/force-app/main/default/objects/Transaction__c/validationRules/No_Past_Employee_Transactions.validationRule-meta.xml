@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Past_Employee_Transactions</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Employee__r.End_Employment_Date__c))</errorConditionFormula>
+    <errorMessage>Can&apos;t create a transaction for an employee that no longer works here</errorMessage>
+</ValidationRule>

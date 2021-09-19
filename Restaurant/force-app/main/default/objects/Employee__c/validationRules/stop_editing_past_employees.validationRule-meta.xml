@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>stop_editing_past_employees</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( NOT( ISCHANGED( RecordTypeId ) ) ,(RecordTypeId = &quot;0125f000000bt0j&quot;))</errorConditionFormula>
+    <errorMessage>Can&apos;t edit past employee records, for archive use only</errorMessage>
+</ValidationRule>
