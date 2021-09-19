@@ -1,0 +1,40 @@
+<apex:page sidebar="false" Controller="transactionLU">
+	<apex:stylesheet value="{!$Resource.styles}"/>\
+    <style>
+    .recordLU{
+        
+    }
+    .tableLU{
+		display:inline-block;
+    	width: 15%;
+        height: 360px;
+        overflow: scroll;
+        vertical-align: top;
+	}
+    #Main{
+    	width: 65%;
+	}
+    </style>
+		<apex:pageBlock >
+            <font color="#F1E5D0">
+            <div class="tableLU" id="Main">
+			<apex:pageBlockTable value="{!transaction}" var="tc">
+				<apex:column styleClass="recordLU" value="{!tc.Contact__c}"/>
+				<apex:column styleClass="recordLU" value="{!tc.Employee__c}"/>
+				<apex:column styleClass="recordLU" value="{!tc.Meal__c}"/>
+				<apex:column styleClass="recordLU" value="{!tc.Sale_Price__c}"/> 
+			</apex:pageBlockTable>
+            </div>
+            <div class="tableLU">
+            <apex:pageBlockTable value="{!contact}" var="cc">
+                <apex:column styleClass="recordLU" value="{!cc.name}"/>	
+            </apex:pageBlockTable>
+            </div>
+            <div class="tableLU">
+            <apex:pageBlockTable value="{!employee}" var="ec">
+                <apex:column styleClass="recordLU" value="{!ec.name}"/> 
+            </apex:pageBlockTable>
+            </div>
+            </font>
+		</apex:pageBlock>
+</apex:page>

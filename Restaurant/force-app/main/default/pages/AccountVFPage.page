@@ -1,0 +1,45 @@
+<apex:page sidebar="false" controller="AccountController">
+    <apex:stylesheet value="{!$Resource.styles}"/>
+    <c:SiteHeader />
+    <apex:form >
+        <apex:pageBlock mode="edit" id="block">
+            <apex:pageBlockSection >
+                <apex:outputPanel rendered="{!hideTable}">
+                    <apex:pageBlockTable value="{!accounts}" var="Acc">
+                        <apex:column headerValue="Name">
+                            <apex:commandButton action="{!getSingleRecord}" value="{!Acc.Name}" rerender="block">
+                                <apex:param assignTo="{!singleRecord}" name="singleRecord" id="singleRecord" value="{!Acc.Id}"/>
+                            </apex:commandButton>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!showTable}">
+                    <apex:pageBlockTable styleClass="accountTable" value="{!accounts}" var="Acc">
+                        <apex:column value="{!Acc.Name}" style="color: WHITE" />
+                        <apex:column headerValue="Address" style="color: WHITE">
+                            <apex:outputField value="{!Acc.BillingStreet}" />
+                                <apex:outputField value="{!Acc.BillingCity}" />
+                                <apex:outputField value="{!Acc.BillingState}" />
+                                <apex:outputField value="{!Acc.BillingPostalCode}" />
+                                <apex:outputField value="{!Acc.BillingCountry}" />
+                        </apex:column>
+                        <apex:column value="{!Acc.Phone}" style="color: WHITE" />
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!showTable}">
+                    <apex:selectList value="{!selected}" multiselect="false" size="1">
+                            <apex:selectOption itemValue="CONTACT" itemLabel="Customer" />
+                            <apex:selectOption itemValue="EMPLOYEE" itemLabel="Employee" />
+                            <apex:selectOption itemValue="MEAL" itemLabel="Menu" />
+                            <apex:selectOption itemValue="DISTRIBUTOR" itemLabel="Distributor" />
+                            <apex:selectOption itemValue="TRANSACTION" itemLabel="Transaction" />
+                    </apex:selectList>
+                    <apex:commandButton action="{!nextPage}" value="Go" />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!showTable}">
+                    <apex:outputLink styleClass="accountLink" value="{!link}" id="theLink">Directions?</apex:outputLink>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
