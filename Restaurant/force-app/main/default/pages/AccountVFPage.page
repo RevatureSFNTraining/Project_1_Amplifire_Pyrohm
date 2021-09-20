@@ -14,7 +14,7 @@
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showTable}">
-                    <apex:pageBlockTable value="{!accounts}" var="Acc">
+                    <apex:pageBlockTable styleClass="accountTable" value="{!accounts}" var="Acc">
                         <apex:column value="{!Acc.Name}"/>
                         <apex:column headerValue="Address">
                             <apex:outputField value="{!Acc.BillingStreet}" />
@@ -23,6 +23,7 @@
                                 <apex:outputField value="{!Acc.BillingPostalCode}" />
                                 <apex:outputField value="{!Acc.BillingCountry}" />
                         </apex:column>
+                        <apex:column value="{!Acc.Phone}" />
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showTable}">
@@ -36,7 +37,7 @@
                     <apex:commandButton action="{!nextPage}" value="Go" />
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showTable}">
-                    <apex:outputLink value="{!link}" id="theLink">Directions?</apex:outputLink>
+                    <apex:outputLink styleClass="accountLink" value="{!link}" id="theLink">Directions?</apex:outputLink>
                 </apex:outputPanel>
             </apex:pageBlockSection>
         </apex:pageBlock>

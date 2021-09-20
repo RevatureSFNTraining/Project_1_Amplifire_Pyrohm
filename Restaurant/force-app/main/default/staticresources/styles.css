@@ -27,6 +27,14 @@ table, th, td {
   padding: 5pt;
 }
 
+.accountLink a:link {
+    color: #EE5622;
+}
+
+.accountTable table {
+  color: WHITE;
+}
+
 .dataTable table{
 width: 100%;
 }

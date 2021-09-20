@@ -18,7 +18,7 @@ public class AccountController {
     }
     
     public void getSingleRecord() {
-        this.accounts = [SELECT Id, Name, BillingStreet, BillingCity, BillingState, BillingPostalCode, BillingCountry FROM Account WHERE Id=:this.singleRecord];
+        this.accounts = [SELECT Id, Name, BillingStreet, BillingCity, BillingState, BillingPostalCode, BillingCountry, Phone FROM Account WHERE Id=:this.singleRecord];
         this.hideTable = false;
         this.showTable = true;
         this.buildLink();
