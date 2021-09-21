@@ -1,9 +1,20 @@
-<apex:page standardController="Food__c" recordSetVar="foods">
+<apex:page controller="FoodController">
+    <apex:stylesheet value="{!$Resource.styles}"/>
     <c:SiteHeader />
-    <apex:pageBlock title="Food Stock">
-        <apex:pageBlockTable value="{! foods }" var="f">
-            <apex:column value="{! f.name }"/>
-            <apex:column value="{! f.stock_amount__c }"/>
-        </apex:pageBlockTable>
-    </apex:pageBlock>
+    <apex:form >
+        <apex:pageBlock title="Food Stock">
+            <apex:pageBlockTable value="{! foods }" var="food">
+                <apex:column value="{! food.name }"/>
+                <apex:column >
+                    <apex:commandButton action="{! decreaseStock}" style="color:red" value="-">
+                        <apex:param value="{!food}"/>
+                    </apex:commandButton>
+                    {!food.Stock_Amount__c}
+                    <apex:commandButton action="{! increaseStock}" style="color:red" value="+">
+                        <apex:param value="{!food}"/>
+                    </apex:commandButton>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
 </apex:page>

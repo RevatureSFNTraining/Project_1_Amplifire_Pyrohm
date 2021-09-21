@@ -30,19 +30,11 @@
     </types>
     <types>
         <members>*</members>
-        <name>StaticResource</name>
-    </types>
-    <types>
-        <members>*</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>*</members>
-        <name>PermissionSet</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>Profile</name>
+        <name>StaticResource</name>
     </types>
     <version>52.0</version>
 </Package>

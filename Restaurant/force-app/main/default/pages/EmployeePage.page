@@ -1,39 +1,155 @@
 <apex:page standardStylesheets="false" showChat="false" sidebar="false" standardcontroller="Employee__c" recordSetVar="Employee" >
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <style>
+        .body {
+        	background: rgb(2,0,36);
+			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.8407738095238095) 35%, rgba(0,212,255,1) 100%);
+        }
+    	.welcome {
+        	display: flex;
+        	justify-content: center;
+        	font-size: 300px;
+        	text-shadow: 10px 10px red;
+        	background: transparent;
+        	margin: 0;
+        	
+        }
+        
+        .carouselContainer {
+        	display: flex;
+        	justify-content: center;
+        	height: 25%;
+        	background: black;
+        	border: solid red;
+        }
+        
+        .employeeContainer {
+        	background: black;
+        }
+        
+        .carouselContainer {
+        	display: none;
+        }
+        
+        .employeeContainer {
+        	    display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+        		justify-content: center;
+        }
+        
+        .card {
+        	background-color: transparent !important;
+        	color: red;
+        }
+        
+        .carouselBtn {
+        	background-color: black;
+        }
+        
+        .card:hover {
+        	animation: pulse;
+        	animation-duration: 10s;
+        }
+        
+        .buttonContainer {
+        	display: flex;
+        	justify-content: center;
+        	background-color: black;
+        }
+        .animate__animated.animate__bounce {
+  		--animate-duration: 5s;
+		}
+        .alert-primary {
+        	display: none;
+       	}
+       
+    </style>
 	<c:SiteHeader />
-    <body>
-        <h1>Hello {!$User.FirstName}</h1>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://placedog.net/1920/1080?id=54" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-                <img src="https://placedog.net/1920/1080?id=100" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-                <img src="https://placedog.net/1920/1080?id=10" class="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+    <body class="body">
+        <div class="alert alert-primary" role="alert">
+          This is a primary alert—check it out!
         </div>
-            
-         <apex:repeat value="{!Employee}" var="e">
+        <h1 class='welcome animate__animated animate__bounce' >Hello {!$User.FirstName}</h1>
+        <div class='buttonContainer'>
+            <a class='btn btn-warning carouselBtn'>Employee Of The Month</a>
+        </div>
+      
+        <div class='carouselContainer' >
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://placedog.net/1920/1080?id=54" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placedog.net/1920/1080?id=100" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placedog.net/1920/1080?id=10" class="d-block w-100" alt="..." />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        
+        
+		<apex:form >
+          <div class='employeeContainer' >
+           <apex:repeat value="{!Employee}" var="e" rows="5">
             <div class="card"  style="width: 18rem;">
-                <img class="card-img-top" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Card image cap" />
+                <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
               <div class="card-body">
                 <h5 class="card-title">{!e.Name}</h5>
                 <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
-                <a href="#" id="card" class="btn btn-primary">Go somewhere</a>
+                <a href="{!e}" id="card" class="btn btn-warning">Info</a>
               </div>
             </div>    
           </apex:repeat>
+        </div> 
+        <!-- Pagination -->
+            <table style="width: 100%"><tr>
+                <td>
+                    Page: <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </td>
+                <td align="center">
+                    <!-- Previous page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Previous }" value="« Previous"
+                         rendered="{! HasPrevious }"/>
+                    <!-- inactive (no earlier pages) -->
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                         rendered="{! NOT(HasPrevious) }"/>
+                    &nbsp;&nbsp;
+                    <!-- Next page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Next }" value="Next »"
+                         rendered="{! HasNext }"/>
+                    <!-- inactive (no more pages) -->
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                         rendered="{! NOT(HasNext) }"/>
+                </td>
+                <td align="right">
+                    Records per page:
+                    <apex:selectList value="{! PageSize }" size="1">
+                        <apex:selectOption itemValue="5" itemLabel="5"/>
+                        <apex:selectOption itemValue="20" itemLabel="20"/>
+                        <apex:actionSupport event="onchange" reRender="contacts_list"/>
+                    </apex:selectList>
+                </td>
+            </tr>
+          </table>
+        </apex:form>     
+           
+        
     </body>
 
 <script>
@@ -50,6 +166,8 @@
       function handleClick() {
           console.log('im clicked')
           container1.style.display = 'none'  
-      }      
+      }
+          
+      
 </script>
 </apex:page>

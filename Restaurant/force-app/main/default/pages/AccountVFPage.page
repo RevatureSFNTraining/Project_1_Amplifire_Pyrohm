@@ -1,17 +1,17 @@
 <apex:page sidebar="false" showHeader="false" controller="AccountController">
     <apex:stylesheet value="{!$Resource.styles}" />
     <c:SiteHeader />
-    <apex:form>
+    <apex:form >
         <apex:pageBlock mode="edit" id="block">
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <center>
                     <apex:outputPanel rendered="{!hideTable}">
                         <apex:pageBlockTable value="{!accounts}" var="Acc">
                             <apex:column headerValue="Name">
                                 <center>
-                                    <apex:commandButton action="{!getSingleRecord}" value="{!Acc.Name}" rerender="block">
+                                    <apex:commandLink action="{!getSingleRecord}" value="{!Acc.Name}" rerender="block" style="color: WHITE">
                                         <apex:param assignTo="{!singleRecord}" name="singleRecord" id="singleRecord" value="{!Acc.Id}" />
-                                    </apex:commandButton>
+                                    </apex:commandLink>
                                 </center>
                             </apex:column>
                         </apex:pageBlockTable>

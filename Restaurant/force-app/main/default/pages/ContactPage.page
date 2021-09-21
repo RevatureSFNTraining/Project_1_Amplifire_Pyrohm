@@ -12,13 +12,12 @@
     <style type="text/css">    
     body 
     	{
-
         margin-top: 100px;
         margin-bottom: 50px;
         padding-bottom: 30px;
     	position: relative;
    		height: 100vh;
-        background-color: rgb(220, 230, 245);
+        
 		}
 	#myDiv
 		{
@@ -148,7 +147,7 @@
         footer {
   				text-align: center;
   				padding: 3px;
-  				background-color: black;
+  				background-color: rgba(49,38,62,255);
   				color: white;
 			}
         
@@ -156,7 +155,7 @@
     </style>
         
 	 </head>
-    <body>
+    <body style="background-color: rgba(236,167,44,255);">
         <c:SiteHeader />
         <h4 style="text-align:center; padding-top: 2rem; padding-bottom:1rem">Hey <b>{!$User.FirstName}&nbsp;{!$User.LastName}</b>. The day is&nbsp;<apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
     		<apex:param value="{! TODAY()}" /> </apex:outputText>&nbsp;and here is a list of our favourite Customers

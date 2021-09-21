@@ -1,5 +1,8 @@
 <apex:page Controller="DistributorController" sidebar="false">
+
+
     <apex:form >
+        <apex:stylesheet value="{!$Resource.styles}"/>
         <apex:pageBlock >
             <apex:pageBlockTable value="{!Distributors}" var="dis">
                 <apex:column >
