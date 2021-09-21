@@ -1,0 +1,14 @@
+<apex:component id="footerComponent">
+     <style>
+			footer {
+  				text-align: center;
+  				padding: 3px;
+  				background-color: black;
+  				color: white;
+			}
+
+     </style>
+<footer>
+        	<p style="font-weight:400; padding-top: 1rem;" >Restäurant of the year for 2021 &copy; </p>
+</footer>
+</apex:component>

@@ -1,0 +1,14 @@
+<apex:page Controller="DistributorController" sidebar="false">
+
+
+    <apex:form >
+        <apex:stylesheet value="{!$Resource.styles}"/>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!Distributors}" var="dis">
+                <apex:column >
+                    <apex:outputField value="{!dis.Name}" />
+                </apex:column>    
+            </apex:pageBlockTable>    
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
