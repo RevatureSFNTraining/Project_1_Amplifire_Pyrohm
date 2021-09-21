@@ -1,9 +1,7 @@
-<apex:page sidebar="false" Controller="transactionLU">
-	<apex:stylesheet value="{!$Resource.styles}"/>\
+<apex:page standardStylesheets="false" showheader="false" Controller="transactionLU">
+    <c:SiteHeader />
+	<apex:stylesheet value="{!$Resource.styles}"/>
     <style>
-    .recordLU{
-        
-    }
     .tableLU{
 		display:inline-block;
     	width: 15%;
@@ -12,29 +10,34 @@
         vertical-align: top;
 	}
     #Main{
-    	width: 65%;
+    	width: 69%;
 	}
+    table {
+    	width: 100%;   
+        height: 100%
+        
+    }
     </style>
+    <div class="wrapper">
 		<apex:pageBlock >
-            <font color="#F1E5D0">
-            <div class="tableLU" id="Main">
-			<apex:pageBlockTable value="{!transaction}" var="tc">
-				<apex:column styleClass="recordLU" value="{!tc.Contact__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Employee__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Meal__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Sale_Price__c}"/> 
-			</apex:pageBlockTable>
+              <div class="tableLU" id="Main">
+                <apex:pageBlockTable id="innerTable" value="{!ctc}" var="tc">
+                    <apex:column value="{!tc.Contact__c}"/>
+                    <apex:column value="{!tc.Employee__c}"/>
+                    <apex:column value="{!tc.Meal__c}"/>
+                    <apex:column value="{!tc.Sale_Price__c}"/>
+                </apex:pageBlockTable>
             </div>
             <div class="tableLU">
-            <apex:pageBlockTable value="{!contact}" var="cc">
-                <apex:column styleClass="recordLU" value="{!cc.name}"/>	
-            </apex:pageBlockTable>
+                <apex:pageBlockTable value="{!contact}" var="cc">
+                    <apex:column value="{!cc.name}"/>	
+                </apex:pageBlockTable>
             </div>
             <div class="tableLU">
-            <apex:pageBlockTable value="{!employee}" var="ec">
-                <apex:column styleClass="recordLU" value="{!ec.name}"/> 
-            </apex:pageBlockTable>
+                <apex:pageBlockTable value="{!employee}" var="ec">
+                    <apex:column value="{!ec.name}"/> 
+                </apex:pageBlockTable>
             </div>
-            </font>
 		</apex:pageBlock>
+     </div>
 </apex:page>

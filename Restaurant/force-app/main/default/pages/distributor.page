@@ -1,7 +1,10 @@
-<apex:page standardController="Distributor__c" recordSetVar="Distributor" sidebar="false">
+<apex:page Controller="DistributorController" sidebar="false">
+
+
     <apex:form >
+        <apex:stylesheet value="{!$Resource.styles}"/>
         <apex:pageBlock >
-            <apex:pageBlockTable value="{!Distributor}" var="dis">
+            <apex:pageBlockTable value="{!Distributors}" var="dis">
                 <apex:column >
                     <apex:outputField value="{!dis.Name}" />
                 </apex:column>    

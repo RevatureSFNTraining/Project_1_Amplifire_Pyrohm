@@ -1,4 +1,5 @@
 <apex:page standardController="Food__c" recordSetVar="foods">
+    <c:SiteHeader />
     <apex:pageBlock title="Food Stock">
         <apex:pageBlockTable value="{! foods }" var="f">
             <apex:column value="{! f.name }"/>

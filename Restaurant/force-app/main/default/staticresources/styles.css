@@ -27,16 +27,33 @@ table, th, td {
   padding: 5pt;
 }
 
-.accountLink a:link {
+tr { 
+    color: #F1E5D0;
+}
+
+a {
+    text-decoration: none;
+    color: #F1E5D0;
+}
+
+input {
+    color: #F1E5D0;
+}
+
+.wrapper {
+    width: 100vw;    
+}
+
+.accountLink a:link{
     color: #EE5622;
 }
 
 .accountTable table {
-  color: WHITE;
+    color: #F1E5D0;
 }
 
 .dataTable table{
-width: 100%;
+	width: 100%;
 }
 
 .dataTable  th{
