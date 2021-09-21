@@ -12,11 +12,6 @@ public class AccountController {
         this.showTable = false;
     }
     
-    public PageReference save() {
-        update this.accounts;
-        return Page.EmployeePage;
-    }
-    
     public void getSingleRecord() {
         this.accounts = [SELECT Id, Name, BillingStreet, BillingCity, BillingState, BillingPostalCode, BillingCountry, Phone FROM Account WHERE Id=:this.singleRecord];
         this.hideTable = false;
@@ -47,9 +42,10 @@ public class AccountController {
         }
     }
 
+    @TestVisible
     private void buildLink() {
         string linkString = 'https://www.google.com/maps/place/'+ this.accounts[0].BillingStreet + '+' + this.accounts[0].BillingCity + 
-        '+' + this.accounts[0].BillingCountry + '+' + this.accounts[0].BillingPostalCode;
+        '+' + this.accounts[0].BillingState + '+' + this.accounts[0].BillingPostalCode;
         this.link = linkString.replace(' ', '+');
     }
 }

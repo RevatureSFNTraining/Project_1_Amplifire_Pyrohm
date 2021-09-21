@@ -3,7 +3,7 @@
     <c:SiteHeader />
     <apex:form >
         <apex:pageBlock mode="edit" id="block">
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <center>
                 <apex:outputPanel rendered="{!hideTable}">
                     <apex:pageBlockTable value="{!accounts}" var="Acc">
