@@ -48,4 +48,13 @@ public class AccountController {
         '+' + this.accounts[0].BillingState + '+' + this.accounts[0].BillingPostalCode;
         this.link = linkString.replace(' ', '+');
     }
+
+    public void goBack() {
+        this.accounts = [SELECT Id, Name FROM Account];
+        this.hideTable = true;
+        this.showTable = false;
+        this.singleRecord = NULL;
+        this.selected = NULL;
+        this.link = NULL;
+    }
 }

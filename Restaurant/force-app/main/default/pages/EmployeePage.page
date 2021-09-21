@@ -16,7 +16,6 @@
         	margin: 0;
         	
         }
-        
         .carouselContainer {
         	display: flex;
         	justify-content: center;
@@ -39,21 +38,17 @@
                 flex-wrap: wrap;
         		justify-content: center;
         }
-        
         .card {
         	background-color: transparent !important;
         	color: red;
         }
-        
         .carouselBtn {
         	background-color: black;
         }
-        
         .card:hover {
         	animation: pulse;
         	animation-duration: 10s;
         }
-        
         .buttonContainer {
         	display: flex;
         	justify-content: center;
@@ -65,7 +60,9 @@
         .alert-primary {
         	display: none;
        	}
-       
+        .employeeSearch {
+        	display: none;
+        }
     </style>
 	<c:SiteHeader />
     <body class="body">
@@ -75,6 +72,24 @@
         <h1 class='welcome animate__animated animate__bounce' >Hello {!$User.FirstName}</h1>
         <div class='buttonContainer'>
             <a class='btn btn-warning carouselBtn'>Employee Of The Month</a>
+        </div>
+        
+        <form class="d-flex" id="form">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-danger " type="submit">Search</button>
+        </form>
+        
+        <div class="employeeSearch">
+           <apex:repeat value="{!Employee}" var="e">
+            <div class="card"  style="width: 18rem;">
+                <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">{!e.Name}</h5>
+                <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
+                <a href="{!e}" id="card" class="btn btn-warning">Info</a>
+              </div>
+            </div>    
+          </apex:repeat>
         </div>
       
         <div class='carouselContainer' >
@@ -100,9 +115,11 @@
                 </button>
             </div>
         </div>
-     
-        <div class='employeeContainer' >
-           <apex:repeat value="{!Employee}" var="e">
+        
+        
+		<apex:form >
+          <div class='employeeContainer' >
+           <apex:repeat value="{!Employee}" var="e" rows="5">
             <div class="card"  style="width: 18rem;">
                 <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
               <div class="card-body">
@@ -112,24 +129,54 @@
               </div>
             </div>    
           </apex:repeat>
-        </div>    
+        </div> 
+        <!-- Pagination -->
+            <table style="width: 100%"><tr>
+                <td>
+                    Page: <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </td>
+                <td align="center">
+                    <!-- Previous page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Previous }" value="« Previous"
+                         rendered="{! HasPrevious }"/>
+                    <!-- inactive (no earlier pages) -->
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                         rendered="{! NOT(HasPrevious) }"/>
+                    &nbsp;&nbsp;
+                    <!-- Next page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Next }" value="Next »"
+                         rendered="{! HasNext }"/>
+                    <!-- inactive (no more pages) -->
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                         rendered="{! NOT(HasNext) }"/>
+                </td>
+                <td align="right">
+                    Records per page:
+                    <apex:selectList value="{! PageSize }" size="1">
+                        <apex:selectOption itemValue="5" itemLabel="5"/>
+                        <apex:selectOption itemValue="20" itemLabel="20"/>
+                        <apex:actionSupport event="onchange" reRender="contacts_list"/>
+                    </apex:selectList>
+                </td>
+            </tr>
+          </table>
+        </apex:form>     
+           
         
     </body>
 
-<script>
-      let a = true;
-      a ? console.log('h3y') : console.log('failed hey')
-      
-      const container1 = document.getElementById('carouselExampleControls')
-      
-      document.getElementById('card').addEventListener('click', e => {
-          e.preventDefault();
-          handleClick();
-       })
-      
-      function handleClick() {
-          console.log('im clicked')
-          container1.style.display = 'none'  
-      }      
-</script>
+    <script>
+          let a = true;
+          a ? console.log('h3y') : console.log('failed hey')
+          document.getElementById('card').addEventListener('click', e => {
+              e.preventDefault();
+              handleClick();
+           })
+          function handleClick() {
+              console.log('im clicked')
+              container1.style.display = 'none'  
+          }
+    </script>
 </apex:page>

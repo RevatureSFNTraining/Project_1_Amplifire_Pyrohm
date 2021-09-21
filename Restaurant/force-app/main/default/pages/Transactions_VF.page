@@ -1,36 +1,52 @@
 <apex:page standardStylesheets="false" showheader="false" Controller="transactionLU">
     <c:SiteHeader />
-	<apex:stylesheet value="{!$Resource.styles}"/>
+    <apex:stylesheet value="{!$Resource.styles}"/>
     <style>
     .tableLU{
-		display:inline-block;
-    	width: 15%;
+        display:inline-block;
+        width: 15%;
         height: 360px;
         overflow: scroll;
         vertical-align: top;
-	}
+    }
     #Main{
-    	width: 69%;
-	}
+        width: 69%;
+    }
     table {
-    	width: 100%;   
-        height: 100%
-        
+        width: 100%;   
+        height: 100% 
     }
     </style>
     <div class="wrapper">
-		<apex:pageBlock >
+        <apex:form >
+        <apex:pageBlock >
               <div class="tableLU" id="Main">
                 <apex:pageBlockTable id="innerTable" value="{!ctc}" var="tc">
-                    <apex:column value="{!tc.Contact__c}"/>
-                    <apex:column value="{!tc.Employee__c}"/>
-                    <apex:column value="{!tc.Meal__c}"/>
-                    <apex:column value="{!tc.Sale_Price__c}"/>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Contact__c}"/>
+                    <apex:facet name="header">Victim</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Employee__c}"/>
+                    <apex:facet name="header">Minion</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Meal__c}"/>
+                    <apex:facet name="header">Food</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Sale_Price__c}"/>
+                    <apex:facet name="header">Loot</apex:facet>
+                    </apex:column>
                 </apex:pageBlockTable>
+                <apex:inlineEditSupport event="ondblclick"/>
+                <apex:pageBlockButtons >
+                      <apex:commandButton value="Save" action="{!save}" id="savebutton" style="color: black"/>
+                </apex:pageBlockButtons>
             </div>
             <div class="tableLU">
                 <apex:pageBlockTable value="{!contact}" var="cc">
-                    <apex:column value="{!cc.name}"/>	
+                    <apex:column value="{!cc.name}"/>   
                 </apex:pageBlockTable>
             </div>
             <div class="tableLU">
@@ -38,6 +54,7 @@
                     <apex:column value="{!ec.name}"/> 
                 </apex:pageBlockTable>
             </div>
-		</apex:pageBlock>
+        </apex:pageBlock>
+     </apex:form>
      </div>
 </apex:page>
