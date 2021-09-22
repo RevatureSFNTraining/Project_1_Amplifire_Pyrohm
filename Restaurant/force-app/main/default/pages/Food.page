@@ -1,4 +1,4 @@
-<apex:page sidebar="false"  controller="FoodController">
+<apex:page sidebar="false"  showHeader="false" controller="FoodController">
     <apex:stylesheet value="{!$Resource.styles}"/>
     <c:SiteHeader />
     <apex:form>
