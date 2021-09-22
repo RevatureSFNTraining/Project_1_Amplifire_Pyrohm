@@ -4,14 +4,13 @@
     
     <style>
         .body {
-        	background: rgb(2,0,36);
-			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.8407738095238095) 35%, rgba(0,212,255,1) 100%);
+        	background-color:aliceblue;
         }
     	.welcome {
         	display: flex;
         	justify-content: center;
         	font-size: 300px;
-        	text-shadow: 10px 10px red;
+        	text-shadow: 10px 10px #0dcaf0;
         	background: transparent;
         	margin: 0;
         	
@@ -20,12 +19,12 @@
         	display: flex;
         	justify-content: center;
         	height: 25%;
-        	background: black;
+        	background: aliceblue;
         	border: solid red;
         }
         
         .employeeContainer {
-        	background: black;
+        	background: aliceblue;
         }
         
         .carouselContainer {
@@ -40,10 +39,14 @@
         }
         .card {
         	background-color: transparent !important;
-        	color: red;
+        	color: black;
         }
-        .carouselBtn {
-        	background-color: black;
+        .eotm {
+        	background-color: #0dcaf0 !important;
+        }
+
+        .eotm:hover {
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
         .card:hover {
         	animation: pulse;
@@ -52,7 +55,7 @@
         .buttonContainer {
         	display: flex;
         	justify-content: center;
-        	background-color: black;
+        	background-color: aliceblue;
         }
         .animate__animated.animate__bounce {
   		--animate-duration: 5s;
@@ -61,7 +64,7 @@
         	display: none;
        	}
         .employeeSearch {
-        	display: none;
+        	
         }
     </style>
 	<c:SiteHeader />
@@ -71,7 +74,7 @@
         </div>
         <h1 class='welcome animate__animated animate__bounce' >Hello {!$User.FirstName}</h1>
         <div class='buttonContainer'>
-            <a class='btn btn-warning carouselBtn'>Employee Of The Month</a>
+            <a class='btn eotm'>Employee Of The Month</a>
         </div>
         
         <form class="d-flex" id="formClick">
@@ -81,11 +84,13 @@
         
         <div class="employeeSearch">
            <apex:repeat value="{!Employee}" var="e">
-            <div class="card"  style="width: 18rem;">
+            <div class="employeeCardSearch" id="{!e.Name}" style="width: 18rem; display: none;">
                 <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
               <div class="card-body">
-                <h5 class="card-title">{!e.Name}</h5>
-                <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
+                  <h5 class="card-title">{!e.Name}</h5>
+                  <div class="moreInfo" style="display: none;">
+                      <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
+                  </div>
                 <a href="{!e}" id="card" class="btn btn-warning">Info</a>
               </div>
             </div>    
@@ -122,11 +127,13 @@
            <apex:repeat value="{!Employee}" var="e" rows="5">
             <div class="card"  style="width: 18rem;">
                 <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title">{!e.Name}</h5>
-                <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
-                <a href="#" id="cardClick" class="btn btn-warning">Info</a>
-              </div>
+                <div class="card-body">
+                    <h5 class="card-title">{!e.Name}</h5>
+                    <div class="moreInfo" style="display: none;">
+                        <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
+                    </div>
+                  <a href="{!e}" id="card" class="btn btn-warning">Info</a>
+                </div>
             </div>    
           </apex:repeat>
         </div> 
@@ -178,6 +185,28 @@
                 // form value from submission
                 let input = document.getElementById("input").value;
                 console.log(input);
+                let empC = document.querySelector("div.employeeContainer") 
+                // get the employeeSearch div
+                if (input == '' && empC.style.display == 'none') {
+                    document.querySelector("body > div.employeeSearch").style.display = 'none'
+                    empC.style.display = 'flex';
+                } else if (input == '') {
+                    alert('Please Enter a Value');
+                } else {
+                    let employeeReturn = document.getElementById(input);
+                    console.log(employeeReturn);
+                    if (employeeReturn != null) {
+                    empC.style.display = "none";
+                    employeeReturn.style.display = "block";
+                    console.log(input);
+                    } else {
+                        alert('Employee Not Found');
+                    }
+                }
+                
+                document.querySelector("#input").value = '';
+                
+                
             });
     </script>
 </apex:page>

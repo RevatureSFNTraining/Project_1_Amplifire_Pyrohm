@@ -4,13 +4,13 @@
     <style>
     .tableLU{
         display:inline-block;
-        width: 15%;
+        width: 20%;
         height: 360px;
         overflow: scroll;
         vertical-align: top;
     }
     #Main{
-        width: 69%;
+        width: 59%;
     }
     table {
         width: 100%;   
@@ -40,21 +40,37 @@
                     </apex:column>
                 </apex:pageBlockTable>
                 <apex:inlineEditSupport event="ondblclick"/>
-                <apex:pageBlockButtons >
-                      <apex:commandButton value="Save" action="{!save}" id="savebutton" style="color: black"/>
-                </apex:pageBlockButtons>
             </div>
-            <div class="tableLU">
+            <div class="tableLU" id="c">
                 <apex:pageBlockTable value="{!ccc}" var="cc">
-                    <apex:column value="{!cc.name}"/>   
+                    <apex:column >
+                        <apex:outputField value="{!cc.name}"/>  
+                        <apex:facet name="header">Victims</apex:facet>
+                    </apex:column>
+                    <apex:column > 
+                        <apex:commandButton value="click" action="{!save}" reRender="c" style="color: black"/> 
+                        <apex:param value="{!cc}" assignTo="{!ccc}"/> 
+                    </apex:column> 
                 </apex:pageBlockTable>
             </div>
-            <div class="tableLU">
+            <div class="tableLU" id="e">
                 <apex:pageBlockTable value="{!cec}" var="ec">
-                    <apex:column value="{!ec.name}"/> 
+                    <apex:column >
+                        <apex:outputField value="{!ec.name}"/>
+                        <apex:facet name="header">Minions</apex:facet>
+                    </apex:column> 
+                    <apex:column > 
+                        <apex:commandButton value="click" action="{!save}" reRender="e" style="color: black"/> 
+                        <apex:param value="{!ec}" assignTo="{!cec}"/> 
+                    </apex:column>
                 </apex:pageBlockTable>
             </div>
+             <apex:pageBlockButtons >
+                 <apex:commandButton value="Save" action="{!save}" id="savebutton" style="color: black"/>
+                 <apex:commandButton value="New" action="{!create}" id="newbutton" style="color: black"/>
+             </apex:pageBlockButtons>
         </apex:pageBlock>
      </apex:form>
      </div>
+     <c:restFooter />
 </apex:page>

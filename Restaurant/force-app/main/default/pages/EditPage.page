@@ -11,12 +11,10 @@
         <title>Edit</title>
     </head>
 
-    <body>
+    <body style="background-color: aliceblue">
         
         <style>
-            body {
-                background-color: rgb(220, 230, 245);
-            }
+
 
             .requiredInput, .requiredBlock {
                 display: inline-block;
