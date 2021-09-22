@@ -11,12 +11,10 @@
         <title>Edit</title>
     </head>
 
-    <body>
+    <body style="background-color: aliceblue">
         
         <style>
-            body {
-                background-color: rgb(220, 230, 245);
-            }
+
 
             .requiredInput, .requiredBlock {
                 display: inline-block;
@@ -64,13 +62,6 @@
             #backDiv a:hover {
             	color: white;
             }
-            
-            footer {
-  				text-align: center;
-  				padding: 3px;
-  				background-color: black;
-  				color: white;
-			}
 
         </style>
  	<c:SiteHeader />
@@ -104,9 +95,7 @@
 
         </apex:form>
         
-		<footer>
-        	<p style="font-weight:400; padding-top: 1rem;" >Restaurant of the year for 2021 &copy;</p>
-        </footer>
+        <c:restFooter />
 
     </body>
 

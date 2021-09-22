@@ -1,0 +1,17 @@
+<apex:component id="footerComponent">
+     <style>
+			footer {
+				position: fixed;
+				width: 100%;
+				bottom: 0;
+  				text-align: center;
+  				padding: 3px;
+  				background-color: rgb(33, 37, 41);
+  				color: white;
+			}
+
+     </style>
+<footer>
+        	<p style="font-weight:400; padding-top: 1rem;" >Restäurant of the year for 2021 &copy; </p>
+</footer>
+</apex:component>

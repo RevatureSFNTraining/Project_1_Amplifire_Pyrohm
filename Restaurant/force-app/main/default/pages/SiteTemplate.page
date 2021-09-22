@@ -1,4 +1,6 @@
-<apex:page standardStylesheets="false" showHeader="false" id="SiteTemplate">
+<apex:page applyHtmlTag="false" standardStylesheets="false" showHeader="false" id="SiteTemplate">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
     <style>
     	body {
     background: black;
@@ -9,32 +11,39 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    color: #17D4FE;
-    font-size: 60px;
-    font-family: Orbitron;
+    color: rgba(66, 61, 61, 0.8);
+    font-size: 70px;
+    font-weight: 500;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 7px;
-   
+    text-shadow: 0.2cm;
+}
+.clock:hover {
+    transition: 0.6s;
+    font-size: 75px;
+    color: black;
 
-
+}
+.img img {
+    max-width: 700px;
 }
     </style>
   <apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}"/>
   <apex:insert name="header">
     <c:SiteHeader />
-    <hr/>
+    
   </apex:insert>
-  
+  <div class="img">
+      <apex:image url="{!URLFOR($Resource.restImage)}"  alt="restaurant image"/>
+  </div>
+
       <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
         <h1>
-            Its almost lunch
+            <!-- Its almost lunch -->
         </h1>
    
   
-  <apex:insert name="footer">
-    <hr/>
-    <c:SiteFooter />
-    <site:googleAnalyticsTracking />
-  </apex:insert>
+
   <script>
     function showTime(){
     var date = new Date();
@@ -66,4 +75,5 @@
 
 showTime();
     </script>
+    <c:restFooter />
 </apex:page>

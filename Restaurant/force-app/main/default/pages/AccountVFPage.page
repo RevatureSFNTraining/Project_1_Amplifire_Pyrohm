@@ -59,4 +59,5 @@
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
+    <c:restFooter />
 </apex:page>
