@@ -1,87 +1,113 @@
 <apex:page applyHtmlTag="false" standardStylesheets="false" showHeader="false" id="SiteTemplate">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
-    <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
-    <style>
-    	body {
-    background: black;
-}
 
-    .clock {
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        color: rgba(66, 61, 61, 0.8);
-        font-size: 70px;
-        font-weight: 500;
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        letter-spacing: 7px;
-        text-shadow: 0.2cm;
-    }
-    .clock:hover {
-        transition: 0.6s;
-        font-size: 75px;
-        color: black;
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous" />
+        <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
+    </head>
 
-    }
+    <body style="background-color: aliceblue;">
+        <style>
+            body {
+                background: black;
+            }
 
-    .img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            .clock {
+            	transition: 0.6s;
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                color: white;
+                font-size: 70px;
+                font-weight: 500;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                letter-spacing: 7px;
+                text-shadow: 0.2cm;
+            }
 
-    }
-    .img img {
-        margin-top: 50px;
-        max-width: 800px;
-        border: solid;
-        border-color: #25537b;
-        border-width: thick
-    }
-    </style>
-  <apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}"/>
-  <apex:insert name="header">
-    <c:SiteHeader />
-    
-  </apex:insert>
-  <div class="img">
-      <apex:image url="{!URLFOR($Resource.restImage)}"  alt="restaurant image"/>
-      <div id="MyClockDisplay" class="clock" onload="showTime()"></div>  
-  </div>
+            .clock:hover {
+                transition: 0.6s;
+                font-size: 75px;
 
-   
-  
 
-  <script>
-    function showTime(){
-    var date = new Date();
-    var h = date.getHours(); // 0 - 23
-    var m = date.getMinutes(); // 0 - 59
-    var s = date.getSeconds(); // 0 - 59
-    var session = "AM";
-    
-    if(h == 0){
-        h = 12;
-    }
-    
-    if(h > 12){
-        h = h - 12;
-        session = "PM";
-    }
-    
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
-    
-    var time = h + ":" + m + ":" + s + " " + session;
-    document.getElementById("MyClockDisplay").innerText = time;
-    document.getElementById("MyClockDisplay").textContent = time;
-    
-    setTimeout(showTime, 1000);
-    
-}
+            }
 
-showTime();
-    </script>
-    <c:restFooter />
+            .img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .img img {
+                transition: 0.6s;
+                margin-top: 50px;
+                max-width: 800px;
+                border: solid;
+                border-color: #25537b;
+                border-width: thick
+            }
+            .img img:hover {
+                transition: 0.6s;
+                max-width: 1000px;
+
+            }
+            .videoPlayer {
+            width: 125%;
+            right: 0;
+            position: fixed;
+            overflow: hidden;
+            z-index: -10;
+            }
+        </style>
+        <apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}" />
+        <apex:insert name="header">
+            <c:SiteHeader />
+            <video class='videoPlayer' autoPlay="true" loop="true" playsInline="true" defaultMuted="true" muted="true">
+						<source src="{!$Resource.PizzaVideo}" type='video/mp4' />
+			</video>
+
+        </apex:insert>
+        <div class="img">
+            <apex:image url="{!URLFOR($Resource.restImage)}" alt="restaurant image" />
+            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        </div>
+
+
+
+
+        <script>
+            function showTime() {
+                var date = new Date();
+                var h = date.getHours(); // 0 - 23
+                var m = date.getMinutes(); // 0 - 59
+                var s = date.getSeconds(); // 0 - 59
+                var session = "AM";
+
+                if (h == 0) {
+                    h = 12;
+                }
+
+                if (h > 12) {
+                    h = h - 12;
+                    session = "PM";
+                }
+
+                h = (h < 10) ? "0" + h : h;
+                m = (m < 10) ? "0" + m : m;
+                s = (s < 10) ? "0" + s : s;
+
+                var time = h + ":" + m + ":" + s + " " + session;
+                document.getElementById("MyClockDisplay").innerText = time;
+                document.getElementById("MyClockDisplay").textContent = time;
+
+                setTimeout(showTime, 1000);
+
+            }
+
+            showTime();
+        </script>
+        <c:restFooter />
+    </body>
 </apex:page>

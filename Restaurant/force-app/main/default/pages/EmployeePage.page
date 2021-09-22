@@ -1,7 +1,10 @@
 <apex:page standardStylesheets="false" showChat="false" sidebar="false" standardcontroller="Employee__c" recordSetVar="Employee" >
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .body {
         	background-color:aliceblue;
@@ -9,7 +12,7 @@
     	.welcome {
         	display: flex;
         	justify-content: center;
-        	font-size: 300px;
+        	font-size: 200px;
         	text-shadow: 10px 10px #0dcaf0;
         	background: transparent;
         	margin: 0;
@@ -24,6 +27,10 @@
         
         .employeeContainer {
         	background: aliceblue;
+        }
+        .employeeSearch {
+            display: flex;
+            justify-content: center;
         }
         
         .carouselContainer {
@@ -53,7 +60,7 @@
             background-color: aliceblue;
             flex-direction: row;
             align-items: baseline;
-            margin: 100px;
+            margin: 50px;
         }
         .animate__animated.animate__bounce {
   		--animate-duration: 5s;
@@ -69,15 +76,28 @@
             background-color: #0dcaf0 !important;
             color: white !important;
         }
+        .innerModal {
+            text-align: center;
+            color: rgb(19, 87, 146);
+            text-shadow: 6px 6px 8px #000000;
+        }
+        .modal-body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column
+        }
+        .modalImage {
+            border: 10px solid #0dcaf0;
+        }
     </style>
 	<c:SiteHeader />
     <body class="body">
         <div class="alert alert-primary" role="alert">
-          This is a primary alert—check it out!
+          Thanks For Visiting the Employee Page!
         </div>
         <h1 class='welcome animate__animated animate__bounce' >Hello {!$User.FirstName}</h1>
         <div class='buttonContainer'>
-            <a id="eotm" class='btn eotm'>Employee Of The Month</a>
+            <a id="eotm" class='btn eotm' data-toggle="modal" data-target="#exampleModal">Employee Of The Month</a>
             <form class="d-flex" id="formClick">
                 <input class="form-control me-2" id="input" type="search" placeholder="Search" aria-label="Search" />
                 <button class="btn btn-outline-danger" type="submit">Search</button>
@@ -88,15 +108,45 @@
            <apex:repeat value="{!Employee}" var="e">
             <div class="employeeCardSearch" id="{!e.Name}" style="width: 18rem; display: none;">
                 <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
-              <div class="card-body">
+              <div class="card-body" style="border: solid;">
                   <h5 class="card-title">{!e.Name}</h5>
-                  <div class="moreInfo" style="display: none;">
-                      <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
+                  <div class="moreInfo">
+                    <p class="card-text">Email: {!e.email__c}</p>
+                    <p class="card-text">Phone: {!e.phone__c}</p>
+                    <p class="card-text">Gender: {!e.gender__c}</p>
+                    <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
                   </div>
-                <a href="#" id="card" class="btn btn-warning">Info</a>
+                <button id="card" class="btn btn-warning">Info</button>
               </div>
             </div>    
           </apex:repeat>
+        </div>
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contrats!!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <h2 class="innerModal">We would like to Congratulate Joey Reinger Employee of the Month!</h2>
+                <img class="modalImage" src="https://robohash.org/blanditiisdelenitialias.png?size=300x300&set=set1" alt="Employee of the Month" />
+                </div>
+                <div class="modal-footer">
+                <button type="button" class='btn eotm' data-dismiss="modal">Close</button>
+                
+                </div>
+            </div>
+            </div>
         </div>
       
         <div class='carouselContainer'>
@@ -126,11 +176,14 @@
 		<apex:form >
           <div class='employeeContainer' >
            <apex:repeat value="{!Employee}" var="e" rows="5">
-            <div class="card"  style="width: 18rem;">
+            <div class="card"  style="width: 18rem;" id="{!e.Name}_card">
                 <img class="card-img-top" src="{!e.picture__c}" alt="Card image cap" />
                 <div class="card-body">
                     <h5 class="card-title">{!e.Name}</h5>
                     <div class="moreInfo" style="display: none;">
+                        <p class="card-text">Email: {!e.email__c}</p>
+                        <p class="card-text">Phone: {!e.phone__c}</p>
+                        <p class="card-text">Gender: {!e.gender__c}</p>
                         <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
                     </div>
                   <a href="#" id="cardClick" class="btn btn-warning">Info</a>
@@ -183,7 +236,18 @@
 
             document.getElementById("cardClick").addEventListener("click", (e) => {
                 e.preventDefault();
+
+                console.log(e.target.parentElement);
                 console.log(e);
+                let a = document.getElementById(e.target.offsetParent.id);
+                console.log(a);
+                if (a.getElementsByClassName('moreInfo')[0].style.display == "block") {
+                    a.getElementsByClassName('moreInfo')[0].style.display = "none";
+                } else {
+                    a.getElementsByClassName('moreInfo')[0].style.display = "block";
+                }
+                
+                
             });
 
             document.getElementById("formClick").addEventListener("submit", (e) => {
@@ -212,5 +276,17 @@
                 }
                 document.querySelector("#input").value = '';
             });
+
+                closeNot = () => {
+                    setTimeout(() => {
+                    document.getElementsByClassName('alert-primary')[0].style.display = 'none'
+                    }, 3000);
+                }
+
+                openNot = () => {
+                    document.getElementsByClassName('alert-primary')[0].style.display = "block"
+                    closeNot();
+                }
+                openNot();
     </script>
 </apex:page>

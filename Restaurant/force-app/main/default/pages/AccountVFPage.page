@@ -1,15 +1,16 @@
-<apex:page sidebar="false" showHeader="false" controller="AccountController">
+<apex:page applyHtmlTag="false" standardStylesheets="false" sidebar="false" showHeader="false" controller="AccountController">
+    <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
     <apex:stylesheet value="{!$Resource.styles}" />
     <c:SiteHeader />
     <apex:form >
         <apex:pageBlock mode="edit" id="block">
             <apex:pageBlockSection >
                 <center>
-                    <apex:outputPanel rendered="{!hideTable}">
-                        <apex:pageBlockTable value="{!accounts}" var="Acc">
+                    <apex:outputPanel styleClass="tableContainer" rendered="{!hideTable}">
+                        <apex:pageBlockTable styleClass="table" id="table" value="{!accounts}" var="Acc">
                             <apex:column headerValue="Name">
                                 <center>
-                                    <apex:commandLink action="{!getSingleRecord}" value="{!Acc.Name}" rerender="block" style="color: WHITE">
+                                    <apex:commandLink action="{!getSingleRecord}" value="{!Acc.Name}" rerender="block" >
                                         <apex:param assignTo="{!singleRecord}" name="singleRecord" id="singleRecord" value="{!Acc.Id}" />
                                     </apex:commandLink>
                                 </center>
@@ -19,8 +20,8 @@
                 </center>
                 <apex:outputPanel rendered="{!showTable}">
                     <apex:pageBlockTable styleClass="accountTable" value="{!accounts}" var="Acc">
-                        <apex:column value="{!Acc.Name}" style="color: WHITE" />
-                        <apex:column headerValue="Address" style="color: WHITE">
+                        <apex:column value="{!Acc.Name}"  />
+                        <apex:column headerValue="Address" >
                             <center>
                                 <apex:outputLink styleClass="accountLink" value="{!link}" id="theLink">
                                     <apex:outputField value="{!Acc.BillingStreet}" />
@@ -35,7 +36,7 @@
                                 </apex:outputLink>
                             </center>
                         </apex:column>
-                        <apex:column value="{!Acc.Phone}" style="color: WHITE" />
+                        <apex:column value="{!Acc.Phone}"  />
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showTable}">

@@ -1,4 +1,5 @@
-<apex:page standardStylesheets="false" showheader="false" Controller="transactionLU">
+<apex:page applyHtmlTag="false" standardStylesheets="false" showheader="false" Controller="transactionLU">
+    <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
     <c:SiteHeader />
     <apex:stylesheet value="{!$Resource.styles}"/>
     <style>
@@ -48,8 +49,9 @@
                         <apex:facet name="header">Victims</apex:facet>
                     </apex:column>
                     <apex:column > 
-                        <apex:commandButton value="click" action="{!save}" reRender="c" style="color: black"/> 
-                        <apex:param value="{!cc.id}" assignTo="{!scc}"/> 
+                        <apex:commandButton value="Select" action="{!save}" reRender="c" style="color: black"> 
+                            <apex:param value="{!cc.id}" assignTo="{!scc}" name="nc"/> 
+                        </apex:commandButton>
                     </apex:column> 
                 </apex:pageBlockTable>
             </div>
@@ -60,14 +62,15 @@
                         <apex:facet name="header">Minions</apex:facet>
                     </apex:column> 
                     <apex:column > 
-                        <apex:commandButton value="click" action="{!save}" reRender="e" style="color: black"/> 
-                        <apex:param value="{!ec.id}" assignTo="{!sec}"/> 
+                        <apex:commandButton value="Select" action="{!save}" reRender="e" style="color: black"> 
+                            <apex:param value="{!ec.id}" assignTo="{!sec}" name="ne"/>
+                        </apex:commandButton>
                     </apex:column>
                 </apex:pageBlockTable>
             </div>
              <apex:pageBlockButtons >
                  <apex:commandButton value="Save" action="{!save}" id="savebutton" style="color: black"/>
-                 <apex:commandButton value="New" action="{!create}" id="newbutton" style="color: black" reRender="rr"/>
+                 <apex:commandButton value="New" action="{!create}" id="newbutton" style="color: black"/>
              </apex:pageBlockButtons>
         </apex:pageBlock>
      </apex:form>

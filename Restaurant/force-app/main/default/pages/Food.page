@@ -1,20 +1,25 @@
-<apex:page sidebar="false"  showHeader="false" controller="FoodController">
-    <apex:stylesheet value="{!$Resource.styles}"/>
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false" controller="FoodController">
     <c:SiteHeader />
+    <apex:stylesheet value="{!$Resource.styles}"/>
     <apex:form >
-        <apex:pageBlock title="Food Stock">
-            <apex:pageBlockTable value="{! foods }" var="food">
+        <apex:pageBlock title="Food Stock" id="stock">
+            <apex:pageBlockTable styleClass="table" value="{! foods }" var="food">
                 <apex:column value="{! food.name }"/>
-                <apex:column >
-                    <apex:commandButton action="{! decreaseStock}" style="color:red" value="-">
-                        <apex:param assignTo="{!fName}" value="{!food.id}"/>
-                    </apex:commandButton>
-                    {!food.Stock_Amount__c}
-                    <apex:commandButton action="{! increaseStock}" style="color:red" value="+">
-                        <apex:param assignTo="{!fName}" value="{!food.id}"/>
-                    </apex:commandButton>
+                <apex:column headerValue="Amount in Stock" >
+                    <center>
+                        <!--<span class="d-inline-block">-->
+                        <apex:commandButton action="{!decreaseStock}" style="color:red" value="-" reRender="stock">
+                            <apex:param assignTo="{!fName}" name="fName1" id="fName1" value="{!food.Id}"/>
+                        </apex:commandButton>
+                        <p>{!food.Stock_Amount__c}</p>
+                        <apex:commandButton action="{!increaseStock}" style="color:red" value="+" reRender="stock" >
+                            <apex:param assignTo="{!fName}" name="fName2" id="fName2" value="{!food.Id}"/>
+                        </apex:commandButton>
+                        <!--</span>-->
+                    </center>
                 </apex:column>
             </apex:pageBlockTable>
         </apex:pageBlock>
     </apex:form>
+    <c:restFooter />
 </apex:page>

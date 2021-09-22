@@ -1,3 +1,55 @@
+<apex:page applyHtmlTag="false" standardStylesheets="false" showChat="false" showHeader="false" Controller="DistributorController">
+    <link rel="SHORTCUT ICON" href="{!URLFOR($Resource.favicon)}" />
+    <c:SiteHeader />
+	<apex:stylesheet value="{!$Resource.styles}"/>
+    <apex:pageblock >
+        <apex:form >
+            <h1>Distributor Hub</h1>
+            <apex:pageBlockTable value="{!Distributors}" var="dis">
+                <apex:column >
+                    <apex:outputLink value="{!URLFOR($Action.Distributor__c.View, dis.id)}" target="_blank">
+                        {!dis.Name}
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column >
+                <apex:outputText value="Invoice ID: " /><apex:outputField value="{!dis.id}" />
+                </apex:column>
+                <apex:column >
+                    <apex:commandButton action="{!csvFactory}" value="{!dis.Name} Invoice" rerender="block">
+                        <apex:param name="csvParam" value="{!dis.id}" assignTo="{!csvParam}" />
+                    </apex:commandButton>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:commandButton value="Download" onclick="csvJSFunc()" />
+        </apex:form>
+    </apex:pageblock>
+    
+    
+    <script>
+    function csvJSFunc(){
+        let res = '{!csvResult}'
+        res = res.replaceAll('<br>', '\n');
+        console.log(res);
+        
+        var parser = new DOMParser;
+                        var dom = parser.parseFromString(
+                            '<!doctype html><body>' + res,
+                            'text/html');
+                        var decodedString = dom.body.textContent;
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(decodedString);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'output.csv';
+        hiddenElement.click(); 
+    }
+    </script>    
+    <c:restFooter />
+</apex:page>
+
+
+
+
+<!--
 <apex:page Controller="DistributorController" sidebar="false">
 
 
@@ -12,3 +64,4 @@
         </apex:pageBlock>
     </apex:form>
 </apex:page>
+-->
