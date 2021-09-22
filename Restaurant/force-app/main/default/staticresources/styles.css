@@ -6,7 +6,12 @@ body {
 }
 
 h1 {
-  color: #ECA72C;
+    display: flex;
+    justify-content: center;
+    font-size: 300px;
+    text-shadow: 10px 10px #0dcaf0;
+    background: transparent;
+    margin: 0;
 }
 
 h2 {

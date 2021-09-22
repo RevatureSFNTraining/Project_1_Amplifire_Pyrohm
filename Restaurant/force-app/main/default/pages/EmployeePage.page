@@ -1,7 +1,7 @@
 <apex:page standardStylesheets="false" showChat="false" sidebar="false" standardcontroller="Employee__c" recordSetVar="Employee" >
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    
+
     <style>
         .body {
         	background-color:aliceblue;
@@ -13,7 +13,6 @@
         	text-shadow: 10px 10px #0dcaf0;
         	background: transparent;
         	margin: 0;
-        	
         }
         .carouselContainer {
         	display: flex;
@@ -30,12 +29,12 @@
         .carouselContainer {
         	display: none;
         }
-        
         .employeeContainer {
         	    display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
         		justify-content: center;
+                justify-content: space-around;
         }
         .card {
         	background-color: transparent !important;
@@ -44,18 +43,17 @@
         .eotm {
         	background-color: #0dcaf0 !important;
         }
-
-        .eotm:hover {
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        }
         .card:hover {
         	animation: pulse;
-        	animation-duration: 10s;
+        	animation-duration: 1s;
         }
         .buttonContainer {
         	display: flex;
-        	justify-content: center;
-        	background-color: aliceblue;
+            justify-content: space-around;
+            background-color: aliceblue;
+            flex-direction: row;
+            align-items: baseline;
+            margin: 100px;
         }
         .animate__animated.animate__bounce {
   		--animate-duration: 5s;
@@ -63,8 +61,13 @@
         .alert-primary {
         	display: none;
        	}
-        .employeeSearch {
-        	
+        .btn-outline-danger {
+            color: #0dcaf0 !important;
+            border-color: #0dcaf0 !important;
+        }
+        .btn-outline-danger:hover {
+            background-color: #0dcaf0 !important;
+            color: white !important;
         }
     </style>
 	<c:SiteHeader />
@@ -74,14 +77,13 @@
         </div>
         <h1 class='welcome animate__animated animate__bounce' >Hello {!$User.FirstName}</h1>
         <div class='buttonContainer'>
-            <a class='btn eotm'>Employee Of The Month</a>
+            <a id="eotm" class='btn eotm'>Employee Of The Month</a>
+            <form class="d-flex" id="formClick">
+                <input class="form-control me-2" id="input" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-danger" type="submit">Search</button>
+            </form>
         </div>
-        
-        <form class="d-flex" id="formClick">
-            <input class="form-control me-2" id="input" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-danger" type="submit">Search</button>
-        </form>
-        
+
         <div class="employeeSearch">
            <apex:repeat value="{!Employee}" var="e">
             <div class="employeeCardSearch" id="{!e.Name}" style="width: 18rem; display: none;">
@@ -91,13 +93,13 @@
                   <div class="moreInfo" style="display: none;">
                       <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
                   </div>
-                <a href="{!e}" id="card" class="btn btn-warning">Info</a>
+                <a href="#" id="card" class="btn btn-warning">Info</a>
               </div>
             </div>    
           </apex:repeat>
         </div>
       
-        <div class='carouselContainer' >
+        <div class='carouselContainer'>
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -121,7 +123,6 @@
             </div>
         </div>
         
-        
 		<apex:form >
           <div class='employeeContainer' >
            <apex:repeat value="{!Employee}" var="e" rows="5">
@@ -132,7 +133,7 @@
                     <div class="moreInfo" style="display: none;">
                         <p class="card-text">Hired On: {!e.Hired_On_Date__c}</p>
                     </div>
-                  <a href="{!e}" id="card" class="btn btn-warning">Info</a>
+                  <a href="#" id="cardClick" class="btn btn-warning">Info</a>
                 </div>
             </div>    
           </apex:repeat>
@@ -163,17 +164,23 @@
                     Records per page:
                     <apex:selectList value="{! PageSize }" size="1">
                         <apex:selectOption itemValue="5" itemLabel="5"/>
-                        <apex:selectOption itemValue="20" itemLabel="20"/>
                         <apex:actionSupport event="onchange" reRender="contacts_list"/>
                     </apex:selectList>
                 </td>
             </tr>
           </table>
         </apex:form>     
-           
-        
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
+            document.getElementById('eotm').addEventListener('click', function() {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                    });
+            });
+
             document.getElementById("cardClick").addEventListener("click", (e) => {
                 e.preventDefault();
                 console.log(e);
@@ -203,10 +210,7 @@
                         alert('Employee Not Found');
                     }
                 }
-                
                 document.querySelector("#input").value = '';
-                
-                
             });
     </script>
 </apex:page>

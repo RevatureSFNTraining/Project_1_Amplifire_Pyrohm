@@ -6,27 +6,38 @@
     background: black;
 }
 
-.clock {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    color: rgba(66, 61, 61, 0.8);
-    font-size: 70px;
-    font-weight: 500;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    letter-spacing: 7px;
-    text-shadow: 0.2cm;
-}
-.clock:hover {
-    transition: 0.6s;
-    font-size: 75px;
-    color: black;
+    .clock {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: rgba(66, 61, 61, 0.8);
+        font-size: 70px;
+        font-weight: 500;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        letter-spacing: 7px;
+        text-shadow: 0.2cm;
+    }
+    .clock:hover {
+        transition: 0.6s;
+        font-size: 75px;
+        color: black;
 
-}
-.img img {
-    max-width: 700px;
-}
+    }
+
+    .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .img img {
+        margin-top: 50px;
+        max-width: 800px;
+        border: solid;
+        border-color: #25537b;
+        border-width: thick
+    }
     </style>
   <apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}"/>
   <apex:insert name="header">
@@ -35,12 +46,9 @@
   </apex:insert>
   <div class="img">
       <apex:image url="{!URLFOR($Resource.restImage)}"  alt="restaurant image"/>
+      <div id="MyClockDisplay" class="clock" onload="showTime()"></div>  
   </div>
 
-      <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
-        <h1>
-            <!-- Its almost lunch -->
-        </h1>
    
   
 
