@@ -1,9 +1,9 @@
 <apex:page sidebar="false" showHeader="false" controller="AccountController">
     <apex:stylesheet value="{!$Resource.styles}" />
     <c:SiteHeader />
-    <apex:form >
+    <apex:form>
         <apex:pageBlock mode="edit" id="block">
-            <apex:pageBlockSection >
+            <apex:pageBlockSection>
                 <center>
                     <apex:outputPanel rendered="{!hideTable}">
                         <apex:pageBlockTable value="{!accounts}" var="Acc">
@@ -39,17 +39,25 @@
                     </apex:pageBlockTable>
                 </apex:outputPanel>
                 <apex:outputPanel rendered="{!showTable}">
-                    <p>Navigate Elsewhere</p>
-                    <apex:selectList value="{!selected}" multiselect="false" size="1">
-                        <apex:selectOption itemValue="CONTACT" itemLabel="Customer?" />
-                        <apex:selectOption itemValue="EMPLOYEE" itemLabel="Employee?" />
-                        <apex:selectOption itemValue="MEAL" itemLabel="Food?" />
-                        <apex:selectOption itemValue="DISTRIBUTOR" itemLabel="Distributor?" />
-                        <apex:selectOption itemValue="TRANSACTION" itemLabel="Make a transaction?" />
-                    </apex:selectList>
-                    <apex:commandButton action="{!nextPage}" value="Go" />
+                    <center>
+                        <p>Navigate Elsewhere</p>
+                        <apex:selectList value="{!selected}" multiselect="false" size="1">
+                            <apex:selectOption itemValue="CONTACT" itemLabel="Customer?" />
+                            <apex:selectOption itemValue="EMPLOYEE" itemLabel="Employee?" />
+                            <apex:selectOption itemValue="MEAL" itemLabel="Food?" />
+                            <apex:selectOption itemValue="DISTRIBUTOR" itemLabel="Distributor?" />
+                            <apex:selectOption itemValue="TRANSACTION" itemLabel="Make a transaction?" />
+                        </apex:selectList>
+                        <apex:commandButton action="{!nextPage}" value="Go" />
+                    </center>
                 </apex:outputPanel>
+                <center>
+                    <apex:outputPanel rendered="{!showTable}">
+                        <apex:commandButton action="{!goBack}" value="Back to Store List" reRender="block" />
+                    </apex:outputPanel>
+                </center>
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
+    <c:restFooter />
 </apex:page>

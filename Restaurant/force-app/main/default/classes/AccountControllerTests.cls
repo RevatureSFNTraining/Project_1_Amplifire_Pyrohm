@@ -79,4 +79,27 @@ private class AccountControllerTests {
         System.assertEquals('https://www.google.com/maps/place/121234+Street+Road+City1+DE+17542', AC.link);
         Test.stopTest();
     }
+    
+    @isTest static void testGoBack() {
+        Test.startTest();
+        AccountController AC = new AccountController();
+        System.assertEquals(100,Ac.accounts.size());
+        System.assert(AC.hideTable);
+        System.assert(!AC.showTable);
+        
+        Ac.selected = 'CONTACT';
+        AC.singleRecord = [SELECT Id FROM Account WHERE Name='Account1' LIMIT 1].Id;
+        AC.getSingleRecord();
+        
+        System.assertEquals(1, AC.Accounts.size());
+        System.assert(AC.showTable);
+        System.assert(!AC.hideTable);
+        
+        AC.goBack();
+        
+        System.assertEquals(100, AC.Accounts.size());
+        System.assert(AC.hideTable);
+        System.assert(!AC.showTable);
+        Test.stopTest();
+    }
 }
