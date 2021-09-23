@@ -1,40 +1,78 @@
-<apex:page sidebar="false" Controller="transactionLU">
-	<apex:stylesheet value="{!$Resource.styles}"/>\
+<apex:page standardStylesheets="false" showheader="false" Controller="transactionLU">
+    <c:SiteHeader />
+    <apex:stylesheet value="{!$Resource.styles}"/>
     <style>
-    .recordLU{
-        
-    }
     .tableLU{
-		display:inline-block;
-    	width: 15%;
+        display:inline-block;
+        width: 20%;
         height: 360px;
         overflow: scroll;
         vertical-align: top;
-	}
+    }
     #Main{
-    	width: 65%;
-	}
+        width: 59%;
+    }
+    table {
+        width: 100%;   
+        height: 100% 
+    }
     </style>
-		<apex:pageBlock >
-            <font color="#F1E5D0">
-            <div class="tableLU" id="Main">
-			<apex:pageBlockTable value="{!transaction}" var="tc">
-				<apex:column styleClass="recordLU" value="{!tc.Contact__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Employee__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Meal__c}"/>
-				<apex:column styleClass="recordLU" value="{!tc.Sale_Price__c}"/> 
-			</apex:pageBlockTable>
+    <div class="wrapper">
+        <apex:form id="rr">
+        <apex:pageBlock >
+              <div class="tableLU" id="Main">
+                <apex:pageBlockTable id="t" value="{!ctc}" var="tc">
+                    <apex:column >
+                    <apex:outputField value="{!tc.Contact__c}"/>
+                    <apex:facet name="header">Victim</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Employee__c}"/>
+                    <apex:facet name="header">Minion</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Meal__c}"/>
+                    <apex:facet name="header">Food</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                    <apex:outputField value="{!tc.Sale_Price__c}"/>
+                    <apex:facet name="header">Loot</apex:facet>
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:inlineEditSupport event="ondblclick"/>
             </div>
-            <div class="tableLU">
-            <apex:pageBlockTable value="{!contact}" var="cc">
-                <apex:column styleClass="recordLU" value="{!cc.name}"/>	
-            </apex:pageBlockTable>
+            <div class="tableLU" id="c">
+                <apex:pageBlockTable value="{!ccc}" var="cc">
+                    <apex:column >
+                        <apex:outputField value="{!cc.name}"/>  
+                        <apex:facet name="header">Victims</apex:facet>
+                    </apex:column>
+                    <apex:column > 
+                        <apex:commandButton value="Select" action="{!save}" reRender="c" style="color: black"> 
+                            <apex:param value="{!cc.id}" assignTo="{!scc}" name="nc"/> 
+                        </apex:commandButton>
+                    </apex:column> 
+                </apex:pageBlockTable>
             </div>
-            <div class="tableLU">
-            <apex:pageBlockTable value="{!employee}" var="ec">
-                <apex:column styleClass="recordLU" value="{!ec.name}"/> 
-            </apex:pageBlockTable>
+            <div class="tableLU" id="e">
+                <apex:pageBlockTable value="{!cec}" var="ec">
+                    <apex:column >
+                        <apex:outputField value="{!ec.name}"/>
+                        <apex:facet name="header">Minions</apex:facet>
+                    </apex:column> 
+                    <apex:column > 
+                        <apex:commandButton value="Select" action="{!save}" reRender="e" style="color: black"> 
+                            <apex:param value="{!ec.id}" assignTo="{!sec}" name="ne"/>
+                        </apex:commandButton>
+                    </apex:column>
+                </apex:pageBlockTable>
             </div>
-            </font>
-		</apex:pageBlock>
+             <apex:pageBlockButtons >
+                 <apex:commandButton value="Save" action="{!save}" id="savebutton" style="color: black"/>
+                 <apex:commandButton value="New" action="{!create}" id="newbutton" style="color: black"/>
+             </apex:pageBlockButtons>
+        </apex:pageBlock>
+     </apex:form>
+     </div>
+     <c:restFooter />
 </apex:page>
